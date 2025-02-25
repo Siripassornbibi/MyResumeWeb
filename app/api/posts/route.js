@@ -9,3 +9,9 @@ export async function POST(req) {
     await Post.create({title, image, content});
     return NextResponse.json({message: "Post created"},{status: 201});
 }
+
+export async function GET() {
+    await connectMongoDB();
+    const posts = await Post.find();
+    return NextResponse.json({ posts });
+}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteBtn from "./DeleteBtn";
 
 export default function Home() {
 
@@ -12,7 +13,7 @@ export default function Home() {
 
   const getPosts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/posts",
+      const response = await fetch("http://localhost:3000/editpage/api/posts",
         {
           method: "GET",
           cache: "no-store",
@@ -40,7 +41,7 @@ export default function Home() {
       <h1>Siripassorn Siwanno</h1>
       <hr className="my-3" />
       <button className='bg-green-500 p-3 text-white rounded'>
-        <Link href="/create">Create Post</Link>
+        <Link href="/editpage/create">Create Post</Link>
       </button>
       <div className='grid grid-cols-4 mt-3 gap-5'>
         {postData && postData.length > 0 ? (
@@ -50,8 +51,8 @@ export default function Home() {
               <Image src={val.image} width={300} height={0} alt={val.title} />
               <p>{val.content}</p>
               <div className='mt-5'>
-                <Link className='bg-gray-500 text-white border py-2 px-3 rounded-md text-lg my-2' href={`/edit/${val._id}`}>Edit</Link>
-                <Link className='bg-red-500 text-white border py-2 px-3 rounded-md text-lg my-2' href="/delete">Delete</Link>
+                <Link className='bg-gray-500 text-white border py-2 px-3 rounded-md text-lg my-2' href={`/editpage/edit/${val._id}`}>Edit</Link>
+                <DeleteBtn id={val._id} />
               </div>
             </div>
           ))
